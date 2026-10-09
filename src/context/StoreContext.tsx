@@ -33,6 +33,13 @@ import {
   subscribeToOutbox,
   flushOutboxWithReport,
 } from '../lib/outbox';
+import {
+  isSupabaseConfigured,
+  fetchProductsFromSupabase,
+  saveProductToSupabase,
+  deleteProductFromSupabase,
+  STORE_ID,
+} from '../lib/supabase';
 
 export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   storeName: 'MALLROOM',
@@ -176,6 +183,7 @@ interface StoreContextType {
   updateProduct: (product: Product) => Promise<void>;
   addProduct: (product: Product) => Promise<void>;
   deleteProduct: (productId: string) => Promise<void>;
+  setAllProducts: (products: Product[]) => void;
   updateOrderStatus: (orderId: string, status: OrderStatus) => Promise<void>;
   updateOrderTtn: (orderId: string, ttn: string) => Promise<void>;
   deleteOrder: (orderId: string) => Promise<void>;
@@ -549,10 +557,27 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, []);
 
-  // Load products asynchronously from IndexedDB with cosmetics catalog migration
+  // Load products asynchronously with Supabase cloud-first check & IndexedDB fallback
   useEffect(() => {
-    dbGet<Product[]>('shopify_store_products')
-      .then((saved) => {
+    async function loadProducts() {
+      // 1. Try Supabase cloud products if configured
+      if (isSupabaseConfigured()) {
+        try {
+          const cloudProducts = await fetchProductsFromSupabase(STORE_ID);
+          if (cloudProducts && cloudProducts.length > 0) {
+            setProducts(cloudProducts);
+            void dbSet('shopify_store_products', cloudProducts);
+            setHydrated(true);
+            return;
+          }
+        } catch (err) {
+          console.warn('[Supabase] Failed to fetch products from cloud, falling back to local cache', err);
+        }
+      }
+
+      // 2. Fallback to IndexedDB with cosmetics catalog migration
+      try {
+        const saved = await dbGet<Product[]>('shopify_store_products');
         const hasLegacy = saved && saved.some((p) => p.vendor === 'TechPro' || p.handle.includes('smart-watch'));
         const nicheVersion = localStorage.getItem('mallroom_catalog_niche');
 
@@ -563,14 +588,15 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         } else {
           setProducts(saved);
         }
-      })
-      .catch((e) => {
+      } catch (e) {
         console.warn('Failed to load products from IndexedDB', e);
         setProducts(SAMPLE_PRODUCTS);
-      })
-      .finally(() => {
+      } finally {
         setHydrated(true);
-      });
+      }
+    }
+
+    void loadProducts();
   }, []);
 
   // Load orders asynchronously from IndexedDB with localStorage fallback
@@ -664,6 +690,11 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       void dbSet('shopify_store_products', next);
       return next;
     });
+    if (isSupabaseConfigured()) {
+      saveProductToSupabase(updated, STORE_ID).catch((e) =>
+        console.error('Failed to sync updated product to Supabase', e)
+      );
+    }
   };
 
   const addProduct = async (newProduct: Product) => {
@@ -672,6 +703,11 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       void dbSet('shopify_store_products', next);
       return next;
     });
+    if (isSupabaseConfigured()) {
+      saveProductToSupabase(newProduct, STORE_ID).catch((e) =>
+        console.error('Failed to sync new product to Supabase', e)
+      );
+    }
   };
 
   const deleteProduct = async (productId: string) => {
@@ -681,6 +717,16 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return next;
     });
     setCart((prev) => prev.filter((c) => c.product.id !== productId));
+    if (isSupabaseConfigured()) {
+      deleteProductFromSupabase(productId, STORE_ID).catch((e) =>
+        console.error('Failed to delete product from Supabase', e)
+      );
+    }
+  };
+
+  const setAllProducts = (newProducts: Product[]) => {
+    setProducts(newProducts);
+    void dbSet('shopify_store_products', newProducts);
   };
 
   const updateOrderStatus = async (orderId: string, status: OrderStatus) => {
@@ -1018,6 +1064,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         updateProduct,
         addProduct,
         deleteProduct,
+        setAllProducts,
         updateOrderStatus,
         updateOrderTtn,
         deleteOrder,

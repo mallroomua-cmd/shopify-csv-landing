@@ -35,8 +35,12 @@ import {
   Truck,
   Printer,
   Users,
+  Cloud,
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { ProductFormModal } from './ProductFormModal';
+import { SupabaseSettingsCard } from './SupabaseSettingsCard';
+import { isSupabaseConfigured, STORE_ID } from '../lib/supabase';
 import { Product, OrderStatus, StoredOrder, CsvPreviewResult, StoreSettings } from '../types';
 import { SAMPLE_SHOPIFY_CSV } from '../lib/sample-data';
 import {
@@ -68,6 +72,7 @@ export const AdminControlHub: React.FC = () => {
     updateProduct,
     addProduct,
     deleteProduct,
+    setAllProducts,
     orders,
     outboxCount,
     updateOrderStatus,
@@ -96,7 +101,7 @@ export const AdminControlHub: React.FC = () => {
   useModal(isAdminOpen, handleClose);
 
   // Active Hub Tab
-  const [activeTab, setActiveTab] = useState<'products' | 'orders' | 'clients' | 'settings' | 'feed' | 'marketing'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'orders' | 'clients' | 'settings' | 'feed' | 'marketing' | 'supabase'>('products');
 
   // Module: Clients & CRM state
   const [clientSearch, setClientSearch] = useState('');
@@ -137,33 +142,6 @@ export const AdminControlHub: React.FC = () => {
   // Add / Edit Product Modal state
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [productFormData, setProductFormData] = useState<{
-    title: string;
-    handle: string;
-    price: number;
-    compareAtPrice: number | undefined;
-    productType: string;
-    vendor: string;
-    available: boolean;
-    featuredImage: string;
-    images: string;
-    tags: string;
-    bodyHtml: string;
-    sku: string;
-  }>({
-    title: '',
-    handle: '',
-    price: 0,
-    compareAtPrice: undefined,
-    productType: 'Загальне',
-    vendor: 'ШопінгМаркет',
-    available: true,
-    featuredImage: '',
-    images: '',
-    tags: '',
-    bodyHtml: '',
-    sku: '',
-  });
 
   // Tag Quick Adder Popover
   const [quickTagProductId, setQuickTagProductId] = useState<string | null>(null);
@@ -352,6 +330,14 @@ export const AdminControlHub: React.FC = () => {
     return Array.from(set);
   }, [products]);
 
+  const allVendors = useMemo(() => {
+    const set = new Set<string>();
+    products.forEach((p) => {
+      if (p.vendor) set.add(p.vendor);
+    });
+    return Array.from(set);
+  }, [products]);
+
   const filteredProducts = useMemo(() => {
     let list = [...products];
 
@@ -443,111 +429,12 @@ export const AdminControlHub: React.FC = () => {
 
   const handleOpenAddProduct = () => {
     setEditingProduct(null);
-    setProductFormData({
-      title: '',
-      handle: '',
-      price: 990,
-      compareAtPrice: undefined,
-      productType: allCategories[0] || 'Товари',
-      vendor: 'ШопінгМаркет',
-      available: true,
-      featuredImage: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
-      images: '',
-      tags: 'Новинка',
-      bodyHtml: '<p>Опис товару</p>',
-      sku: `PROD-${Math.floor(1000 + Math.random() * 9000)}`,
-    });
     setIsProductModalOpen(true);
   };
 
   const handleOpenEditProduct = (p: Product) => {
     setEditingProduct(p);
-    setProductFormData({
-      title: p.title,
-      handle: p.handle,
-      price: p.price,
-      compareAtPrice: p.compareAtPrice,
-      productType: p.productType,
-      vendor: p.vendor,
-      available: p.available,
-      featuredImage: p.featuredImage,
-      images: p.images.join(', '),
-      tags: p.tags.join(', '),
-      bodyHtml: p.bodyHtml,
-      sku: p.sku || '',
-    });
     setIsProductModalOpen(true);
-  };
-
-  const handleSaveProductModal = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!productFormData.title.trim() || productFormData.price <= 0) return;
-
-    const extraImages = productFormData.images
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean);
-    const allImages = Array.from(new Set([productFormData.featuredImage.trim(), ...extraImages].filter(Boolean)));
-    const tagsArray = productFormData.tags
-      .split(',')
-      .map((t) => t.trim())
-      .filter(Boolean);
-
-    const handle =
-      productFormData.handle.trim() ||
-      productFormData.title
-        .toLowerCase()
-        .replace(/[^a-z0-9а-яіїєґ]+/g, '-')
-        .replace(/^-+|-+$/g, '') ||
-      `prod-${Date.now()}`;
-
-    if (editingProduct) {
-      const updated: Product = {
-        ...editingProduct,
-        title: productFormData.title.trim(),
-        handle,
-        price: productFormData.price,
-        compareAtPrice:
-          productFormData.compareAtPrice && productFormData.compareAtPrice > productFormData.price
-            ? productFormData.compareAtPrice
-            : undefined,
-        productType: productFormData.productType.trim() || 'Загальне',
-        vendor: productFormData.vendor.trim() || 'ШопінгМаркет',
-        available: productFormData.available,
-        featuredImage: productFormData.featuredImage.trim() || allImages[0] || '',
-        images: allImages.length > 0 ? allImages : [productFormData.featuredImage.trim()],
-        tags: tagsArray,
-        bodyHtml: productFormData.bodyHtml,
-        sku: productFormData.sku.trim(),
-        variants: editingProduct.variants.length > 0
-          ? editingProduct.variants.map((v) => ({ ...v, price: productFormData.price }))
-          : [{ id: `var-${handle}-0`, title: 'Default Title', price: productFormData.price }],
-      };
-      await updateProduct(updated);
-    } else {
-      const newProd: Product = {
-        id: `prod-${Date.now()}`,
-        handle,
-        title: productFormData.title.trim(),
-        price: productFormData.price,
-        compareAtPrice:
-          productFormData.compareAtPrice && productFormData.compareAtPrice > productFormData.price
-            ? productFormData.compareAtPrice
-            : undefined,
-        productType: productFormData.productType.trim() || 'Загальне',
-        vendor: productFormData.vendor.trim() || 'ШопінгМаркет',
-        available: productFormData.available,
-        featuredImage: productFormData.featuredImage.trim() || allImages[0] || '',
-        images: allImages.length > 0 ? allImages : [productFormData.featuredImage.trim()],
-        tags: tagsArray,
-        bodyHtml: productFormData.bodyHtml,
-        sku: productFormData.sku.trim(),
-        variants: [{ id: `var-${handle}-0`, title: 'Default Title', price: productFormData.price }],
-      };
-      await addProduct(newProd);
-    }
-
-    setIsProductModalOpen(false);
   };
 
   const handleDuplicateProduct = async (prod: Product) => {
@@ -1261,6 +1148,23 @@ export const AdminControlHub: React.FC = () => {
                 <SlidersHorizontal className="w-4 h-4" />
                 <span>Налаштування & Промо</span>
               </button>
+
+              <button
+                onClick={() => setActiveTab('supabase')}
+                className={`py-3 px-3.5 text-xs sm:text-sm font-bold border-b-2 flex items-center gap-2 whitespace-nowrap transition-all ${
+                  activeTab === 'supabase'
+                    ? 'border-brand-600 text-brand-600 bg-white shadow-xs'
+                    : 'border-transparent text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Cloud className="w-4 h-4" />
+                <span>Хмара Supabase</span>
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    isSupabaseConfigured() ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'
+                  }`}
+                />
+              </button>
             </nav>
 
             {/* TAB CONTENT CONTAINER */}
@@ -1531,6 +1435,34 @@ export const AdminControlHub: React.FC = () => {
               {/* ======================================================== */}
               {activeTab === 'products' && (
                 <div className="space-y-4">
+                  {/* Supabase Status Banner */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-2xl bg-white border border-slate-200/90 text-xs shadow-xs">
+                    <div className="flex items-center gap-2">
+                      <Cloud className="w-4 h-4 text-slate-700" />
+                      <span className="font-bold text-slate-800">
+                        {isSupabaseConfigured() ? 'Хмара Supabase:' : 'База товарів:'}
+                      </span>
+                      {isSupabaseConfigured() ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200 text-[11px]">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          Підключено (Збереження та фото у хмарі)
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 font-bold border border-amber-200 text-[11px]">
+                          <span className="w-2 h-2 rounded-full bg-amber-500" />
+                          Локальний режим (IndexedDB)
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('supabase')}
+                      className="text-xs font-bold text-brand-600 hover:text-brand-800 hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      {isSupabaseConfigured() ? 'Налаштування хмари →' : 'Підключити Supabase хмару →'}
+                    </button>
+                  </div>
+
                   {/* Toolbar */}
                   <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
                     {/* Search */}
@@ -1864,209 +1796,27 @@ export const AdminControlHub: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Add / Edit Product Modal */}
-                  {isProductModalOpen && (
-                    <div
-                      className="fixed inset-0 z-60 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in"
-                      onClick={() => setIsProductModalOpen(false)}
-                    >
-                      <div
-                        className="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto space-y-4"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                          <h3 className="font-heading font-black text-slate-900 text-base">
-                            {editingProduct ? 'Редагування товару' : 'Створення нового товару'}
-                          </h3>
-                          <button
-                            onClick={() => setIsProductModalOpen(false)}
-                            className="text-slate-400 hover:text-slate-600"
-                          >
-                            ✕
-                          </button>
-                        </div>
-
-                        <form onSubmit={handleSaveProductModal} className="space-y-4 text-xs">
-                          {/* Title */}
-                          <div className="space-y-1">
-                            <label className="font-bold text-slate-700">Назва товару *</label>
-                            <input
-                              type="text"
-                              required
-                              value={productFormData.title}
-                              onChange={(e) => setProductFormData({ ...productFormData, title: e.target.value })}
-                              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500 font-medium"
-                              placeholder="Наприклад: Смарт-годинник Titanium Pro"
-                            />
-                          </div>
-
-                          {/* Prices */}
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Ціна (₴) *</label>
-                              <input
-                                type="number"
-                                required
-                                min={1}
-                                value={productFormData.price}
-                                onChange={(e) =>
-                                  setProductFormData({ ...productFormData, price: parseFloat(e.target.value) || 0 })
-                                }
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-brand-500"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Стара акційна ціна (₴)</label>
-                              <input
-                                type="number"
-                                min={0}
-                                value={productFormData.compareAtPrice || ''}
-                                onChange={(e) =>
-                                  setProductFormData({
-                                    ...productFormData,
-                                    compareAtPrice: e.target.value ? parseFloat(e.target.value) : undefined,
-                                  })
-                                }
-                                placeholder="Залиште порожнім, якщо немає знижки"
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-brand-500"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Category & Vendor */}
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Категорія (Type)</label>
-                              <input
-                                type="text"
-                                list="categories-datalist"
-                                value={productFormData.productType}
-                                onChange={(e) => setProductFormData({ ...productFormData, productType: e.target.value })}
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500"
-                              />
-                              <datalist id="categories-datalist">
-                                {allCategories.map((c) => (
-                                  <option key={c} value={c} />
-                                ))}
-                              </datalist>
-                            </div>
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Бренд / Постачальник (Vendor)</label>
-                              <input
-                                type="text"
-                                value={productFormData.vendor}
-                                onChange={(e) => setProductFormData({ ...productFormData, vendor: e.target.value })}
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Image & Preview */}
-                          <div className="space-y-1">
-                            <label className="font-bold text-slate-700">Головне фото (URL)</label>
-                            <div className="flex items-center gap-3">
-                              <input
-                                type="text"
-                                required
-                                value={productFormData.featuredImage}
-                                onChange={(e) =>
-                                  setProductFormData({ ...productFormData, featuredImage: e.target.value })
-                                }
-                                placeholder="https://..."
-                                className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-brand-500"
-                              />
-                              {productFormData.featuredImage && (
-                                <img
-                                  src={productFormData.featuredImage}
-                                  alt="Preview"
-                                  className="w-10 h-10 rounded-lg object-cover border border-slate-200"
-                                />
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Extra Images */}
-                          <div className="space-y-1">
-                            <label className="font-bold text-slate-700">Додаткові фото (URL через кому)</label>
-                            <input
-                              type="text"
-                              value={productFormData.images}
-                              onChange={(e) => setProductFormData({ ...productFormData, images: e.target.value })}
-                              placeholder="https://image1.jpg, https://image2.jpg"
-                              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-brand-500"
-                            />
-                          </div>
-
-                          {/* SKU & Tags */}
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Артикул (SKU)</label>
-                              <input
-                                type="text"
-                                value={productFormData.sku}
-                                onChange={(e) => setProductFormData({ ...productFormData, sku: e.target.value })}
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono focus:outline-none focus:border-brand-500"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <label className="font-bold text-slate-700">Теги (через кому)</label>
-                              <input
-                                type="text"
-                                value={productFormData.tags}
-                                onChange={(e) => setProductFormData({ ...productFormData, tags: e.target.value })}
-                                placeholder="Хіт, Знижка, ТОП"
-                                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Stock switch */}
-                          <div className="flex items-center gap-2 pt-1">
-                            <input
-                              type="checkbox"
-                              id="modal-available"
-                              checked={productFormData.available}
-                              onChange={(e) =>
-                                setProductFormData({ ...productFormData, available: e.target.checked })
-                              }
-                              className="w-4 h-4 rounded text-brand-600 focus:ring-brand-500"
-                            />
-                            <label htmlFor="modal-available" className="font-bold text-slate-700 cursor-pointer">
-                              Товар є в наявності (In Stock)
-                            </label>
-                          </div>
-
-                          {/* Description */}
-                          <div className="space-y-1">
-                            <label className="font-bold text-slate-700">Опис товару (HTML або текст)</label>
-                            <textarea
-                              rows={3}
-                              value={productFormData.bodyHtml}
-                              onChange={(e) => setProductFormData({ ...productFormData, bodyHtml: e.target.value })}
-                              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500 font-mono"
-                            />
-                          </div>
-
-                          {/* Modal Actions */}
-                          <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
-                            <button
-                              type="button"
-                              onClick={() => setIsProductModalOpen(false)}
-                              className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50"
-                            >
-                              Скасувати
-                            </button>
-                            <button
-                              type="submit"
-                              className="px-5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md transition-all active:scale-95"
-                            >
-                              {editingProduct ? 'Зберегти зміни' : 'Створити товар'}
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  )}
+                  {/* Add / Edit Product Modal with Supabase Storage, Drag & Drop, Variants */}
+                  <ProductFormModal
+                    isOpen={isProductModalOpen}
+                    onClose={() => {
+                      setIsProductModalOpen(false);
+                      setEditingProduct(null);
+                    }}
+                    editingProduct={editingProduct}
+                    onSave={async (prod) => {
+                      if (editingProduct) {
+                        await updateProduct(prod);
+                      } else {
+                        await addProduct(prod);
+                      }
+                      setIsProductModalOpen(false);
+                      setEditingProduct(null);
+                    }}
+                    allCategories={allCategories}
+                    allVendors={allVendors}
+                    storeId={STORE_ID}
+                  />
                 </div>
               )}
 
@@ -3544,6 +3294,19 @@ export const AdminControlHub: React.FC = () => {
                       </button>
                     </div>
                   </div>
+                </div>
+              )}
+
+              {/* ======================================================== */}
+              {/* MODULE 6: SUPABASE CLOUD DATABASE & IMAGE STORAGE        */}
+              {/* ======================================================== */}
+              {activeTab === 'supabase' && (
+                <div className="max-w-4xl mx-auto space-y-6">
+                  <SupabaseSettingsCard
+                    products={products}
+                    onProductsUpdated={setAllProducts}
+                    storeId={STORE_ID}
+                  />
                 </div>
               )}
             </main>
