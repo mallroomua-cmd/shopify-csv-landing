@@ -50,30 +50,45 @@ const NAV_CATEGORIES: NavCategory[] = [
     ],
   },
   {
-    id: 'body',
-    label: 'ТІЛО',
-    subcategories: [
-      { title: 'Гелі для душу', categoryKey: 'Гелі для душу' },
-      { title: 'Креми & Лосьйони для тіла', categoryKey: 'Креми для тіла' },
-      { title: 'Скраби & Ексфоліанти', categoryKey: 'Скраби' },
-      { title: 'Догляд за руками & стопами', categoryKey: 'Догляд за руками' },
-    ],
-  },
-  {
     id: 'makeup',
     label: 'МАКІЯЖ',
     subcategories: [
-      { title: 'BB & CC креми', categoryKey: 'BB креми' },
-      { title: 'Кушони з SPF', categoryKey: 'Кушони' },
-      { title: 'Тінти та бальзами для губ', categoryKey: 'Тінти' },
+      { title: 'Губи (Блиски, Тінти, Бальзами)', categoryKey: 'Губи' },
+      { title: "Рум'яна & Хайлайтери", categoryKey: "Рум'яна & Хайлайтери" },
+      { title: 'BB & CC креми', categoryKey: 'Креми' },
       { title: 'Пудри для фіксації', categoryKey: 'Пудри' },
+    ],
+  },
+  {
+    id: 'body',
+    label: 'ТІЛО ТА АРОМАТИ',
+    subcategories: [
+      { title: 'Спреї для тіла та волосся', categoryKey: 'Тіло та Аромати' },
+      { title: 'Креми & Баттери для тіла', categoryKey: 'Тіло та Аромати' },
+      { title: 'Гелі та лосьйони', categoryKey: 'Тіло' },
+    ],
+  },
+  {
+    id: 'accessories',
+    label: 'АКСЕСУАРИ',
+    subcategories: [
+      { title: 'Косметички та органайзери', categoryKey: 'Аксесуари' },
+      { title: 'Пензлі для макіяжу', categoryKey: 'Аксесуари' },
     ],
   },
   {
     id: 'brands',
     label: 'БРЕНДИ',
-    badge: '14+',
+    badge: '22+',
     subcategories: [
+      { title: 'Rhode', categoryKey: 'Rhode' },
+      { title: 'Sol de Janeiro', categoryKey: 'Sol de Janeiro' },
+      { title: 'Fenty Beauty', categoryKey: 'Fenty Beauty' },
+      { title: 'Rare Beauty', categoryKey: 'Rare Beauty' },
+      { title: 'Summer Fridays', categoryKey: 'Summer Fridays' },
+      { title: 'Dior', categoryKey: 'Dior' },
+      { title: 'Hourglass', categoryKey: 'Hourglass' },
+      { title: 'Charlotte Tilbury', categoryKey: 'Charlotte Tilbury' },
       { title: 'COSRX', categoryKey: 'COSRX' },
       { title: 'Beauty of Joseon', categoryKey: 'Beauty of Joseon' },
       { title: 'Round Lab', categoryKey: 'Round Lab' },
@@ -82,8 +97,6 @@ const NAV_CATEGORIES: NavCategory[] = [
       { title: 'Anua', categoryKey: 'Anua' },
       { title: 'Torriden', categoryKey: 'Torriden' },
       { title: 'Manyo', categoryKey: 'Manyo' },
-      { title: 'Medi-Peel', categoryKey: 'Medi-Peel' },
-      { title: 'Haruharu Wonder', categoryKey: 'Haruharu Wonder' },
     ],
   },
   {

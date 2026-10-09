@@ -556,10 +556,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         const hasLegacy = saved && saved.some((p) => p.vendor === 'TechPro' || p.handle.includes('smart-watch'));
         const nicheVersion = localStorage.getItem('mallroom_catalog_niche');
 
-        if (!saved || saved.length === 0 || hasLegacy || nicheVersion !== 'cosmetics_v2') {
+        if (!saved || saved.length === 0 || hasLegacy || nicheVersion !== 'cosmetics_feed_v4') {
           setProducts(SAMPLE_PRODUCTS);
           void dbSet('shopify_store_products', SAMPLE_PRODUCTS);
-          localStorage.setItem('mallroom_catalog_niche', 'cosmetics_v2');
+          localStorage.setItem('mallroom_catalog_niche', 'cosmetics_feed_v4');
         } else {
           setProducts(saved);
         }

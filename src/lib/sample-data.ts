@@ -1,6 +1,221 @@
 import { Product } from '../types';
 
 export const SAMPLE_PRODUCTS: Product[] = [
+  // --- VIRAL BEAUTY & MAKEUP (From Feed) ---
+  {
+    id: 'prod-fenty-gloss-bomb',
+    handle: 'blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-fenty-glow-9ml',
+    title: 'Fenty Beauty Gloss Bomb Universal Lip Luminizer - Fenty Glow (9ml)',
+    bodyHtml: '<p>Культовий сяючий блиск для губ від Ріанни у зірковому універсальному відтінку Fenty Glow. Дарує губам вибуховий дзеркальний блиск, візуальний об’єм та глибоке живлення завдяки олії дерева ши. Не липка формула з легким персиково-ванільним ароматом.</p><ul><li><strong>Відтінок:</strong> Fenty Glow (універсальний рожево-нюдовий з мерехтінням).</li><li><strong>Дія:</strong> візуальний об’єм, пом’якшення, дзеркальний фініш.</li><li><strong>Об’єм:</strong> 9 мл.</li></ul>',
+    vendor: 'Fenty Beauty',
+    productType: 'Губи',
+    tags: ['Fenty Beauty', 'Губи', 'Блиск для губ', 'Rihanna', 'Fenty Glow', 'Сяйво', 'Хіт'],
+    price: 599,
+    compareAtPrice: 799,
+    images: [
+      'https://lil-shop.com.ua/content/images/42/480x480l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-38374241088497.webp',
+      'https://lil-shop.com.ua/content/images/42/480x480l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-44849187175497.webp',
+      'https://lil-shop.com.ua/content/images/42/480x480l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-84337222383842.webp',
+      'https://lil-shop.com.ua/content/images/42/1000x1000l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-38374241088497.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/42/480x480l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-38374241088497.webp',
+    available: true,
+    sku: 'FNTY-GLOSS-GLOW-9',
+    variants: [
+      { id: 'v-fenty-glow-9', title: 'Fenty Glow (9 ml)', price: 599, compareAtPrice: 799 },
+    ],
+  },
+  {
+    id: 'prod-rare-beauty-lip-oil',
+    handle: 'tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-hope',
+    title: 'Rare Beauty Soft Pinch Tinted Lip Oil - Hope (Selena Gomez)',
+    bodyHtml: '<p>Інноваційна желеподібна олійка-тінт від Селени Гомес, яка при нанесенні трансформується в легкий глянцевий блиск і залишає стійкий природний пігмент на весь день. Збагачена олією жожоба та насіння соняшника для живлення губ.</p><ul><li><strong>Відтінок:</strong> Hope (ніжний рожево-персиковий).</li><li><strong>Фініш:</strong> соковитий глянець + стійкий ніжний тінт.</li><li><strong>Формула:</strong> не липка, ультракомфортна.</li></ul>',
+    vendor: 'Rare Beauty',
+    productType: 'Губи',
+    tags: ['Rare Beauty', 'Губи', 'Тінт для губ', 'Олійка для губ', 'Hope', 'Selena Gomez', 'TikTok Хіт'],
+    price: 1099,
+    compareAtPrice: 1399,
+    images: [
+      'https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-83562678680184.webp',
+      'https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-46747683935293.webp',
+      'https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-60477148566199.webp',
+      'https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-93829029147137.webp',
+      'https://lil-shop.com.ua/content/images/40/1000x1000l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-83562678680184.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-83562678680184.webp',
+    available: true,
+    sku: 'RARE-LIP-HOPE',
+    variants: [
+      { id: 'v-rare-hope', title: 'Hope (Повнорозмірний)', price: 1099, compareAtPrice: 1399 },
+    ],
+  },
+  {
+    id: 'prod-summer-fridays-balm',
+    handle: 'balzam-dlia-hub-summer-fridays-lip-butter-balm-brown-sugar-15ml',
+    title: 'Summer Fridays Lip Butter Balm - Brown Sugar (15ml)',
+    bodyHtml: '<p>100% веганський бальзам-баттер для губ шовковистої текстури. Миттєво заспокоює, зволожує та живить сухі губи оліями ші та мурумуру. Надає ледь помітного теплого коричнево-карамельного відтінку та глянцевого сяйва з апетитним ароматом цукрової карамелі.</p><ul><li><strong>Відтінок:</strong> Brown Sugar (теплий карамельний нюд).</li><li><strong>Дія:</strong> глибоке відновлення тріщинок, захист від вітру та холоду.</li><li><strong>Об’єм:</strong> 15 мл.</li></ul>',
+    vendor: 'Summer Fridays',
+    productType: 'Губи',
+    tags: ['Summer Fridays', 'Губи', 'Бальзам для губ', 'Brown Sugar', 'Зволоження', 'Хіт'],
+    price: 499,
+    compareAtPrice: 650,
+    images: [
+      'https://lil-shop.com.ua/content/images/49/480x480l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-73602167448839.webp',
+      'https://lil-shop.com.ua/content/images/49/480x480l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-39327311749870.webp',
+      'https://lil-shop.com.ua/content/images/49/480x480l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-88941785519114.webp',
+      'https://lil-shop.com.ua/content/images/49/1000x1000l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-73602167448839.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/49/480x480l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-73602167448839.webp',
+    available: true,
+    sku: 'SF-BALM-BROWN-15',
+    variants: [
+      { id: 'v-sf-brown-sugar', title: 'Brown Sugar 15ml', price: 499, compareAtPrice: 650 },
+    ],
+  },
+  {
+    id: 'prod-summer-fridays-oil',
+    handle: 'oliika-dlia-hub-summer-fridays-dream-lip-oil-soft-mauve-4-5ml',
+    title: 'Summer Fridays Dream Lip Oil - Soft Mauve (4.5ml)',
+    bodyHtml: '<p>Невагома олійка для губ преміум-класу з велюровим блиском і глибоким доглядовим ефектом. Комплекс із 9 поживних рослинних олій та вітаміну Е розгладжує рельєф губ, забезпечуючи розкішний дзеркальний фініш без липкості.</p><ul><li><strong>Відтінок:</strong> Soft Mauve (вишуканий рожево-бузковий нюд).</li><li><strong>Аромат:</strong> освіжаюча ванільна м’ята.</li><li><strong>Об’єм:</strong> 4.5 мл.</li></ul>',
+    vendor: 'Summer Fridays',
+    productType: 'Губи',
+    tags: ['Summer Fridays', 'Губи', 'Олійка для губ', 'Soft Mauve', 'Живлення', 'Люкс'],
+    price: 599,
+    compareAtPrice: 799,
+    images: [
+      'https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-61569106297316.webp',
+      'https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-56457335759757.webp',
+      'https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-45892348577030.webp',
+      'https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-94411136421060.webp',
+      'https://lil-shop.com.ua/content/images/15/1000x1000l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-61569106297316.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-61569106297316.webp',
+    available: true,
+    sku: 'SF-OIL-MAUVE-45',
+    variants: [
+      { id: 'v-sf-mauve', title: 'Soft Mauve 4.5ml', price: 599, compareAtPrice: 799 },
+    ],
+  },
+  {
+    id: 'prod-rhode-lip-shape',
+    handle: 'konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch',
+    title: 'Rhode Peptide Lip Shape - Stretch (Hailey Bieber)',
+    bodyHtml: '<p>Вірусний контурний олівець для губ від Гейлі Бібер із пептидним комплексом для створення бездоганного пухкого контуру губ. Кремова шовковиста текстура легко тушується, не сушить ніжної шкіри та фіксується до 10 годин.</p><ul><li><strong>Відтінок:</strong> Stretch (глибокий контурний тауп-нюд).</li><li><strong>Дія:</strong> візуальний ліфтинг контуру, пептидне живлення.</li><li><strong>Фініш:</strong> оксамитовий стійкий матовий.</li></ul>',
+    vendor: 'Rhode',
+    productType: 'Губи',
+    tags: ['Rhode', 'Губи', 'Олівець для губ', 'Hailey Bieber', 'Пептиди', 'Хіт', 'TikTok'],
+    price: 799,
+    compareAtPrice: 1050,
+    images: [
+      'https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-23035316499874.webp',
+      'https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-32115321558284.webp',
+      'https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-73602492160670.webp',
+      'https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-82415174542270.webp',
+      'https://lil-shop.com.ua/content/images/25/1000x1000l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-23035316499874.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-23035316499874.webp',
+    available: true,
+    sku: 'RHODE-SHAPE-STRETCH',
+    variants: [
+      { id: 'v-rhode-stretch', title: 'Stretch (Оригінал)', price: 799, compareAtPrice: 1050 },
+    ],
+  },
+  {
+    id: 'prod-dior-backstage-palette',
+    handle: 'palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-univer',
+    title: 'Dior Backstage Glow Face Palette 001 Universal (10g)',
+    bodyHtml: '<p>Легендарна палітра для сяйва обличчя Dior Backstage Glow Face Palette 001 Universal. Секрет візажистів світових показів мод для створення ефекту вологого сяйва шкіри різної інтенсивності — від делікатного денного сяйва до глянцевого вечірнього стробінгу.</p><ul><li><strong>4 гармонійні відтінки:</strong> White Pearl, Gold, Shimmering Peach, Bronze.</li><li><strong>Текстура:</strong> ультратонка пудрова вуаль із мікроперламутром.</li><li><strong>Вага:</strong> 10 г (Made in France).</li></ul>',
+    vendor: 'Dior',
+    productType: "Рум'яна & Хайлайтери",
+    tags: ['Dior', "Рум'яна & Хайлайтери", 'Хайлайтер', 'Backstage', 'Люкс', 'Сяйво', 'Палітра'],
+    price: 2199,
+    compareAtPrice: 2690,
+    images: [
+      'https://lil-shop.com.ua/content/images/47/390x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-83055883802753.webp',
+      'https://lil-shop.com.ua/content/images/47/390x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-30957074229681.webp',
+      'https://lil-shop.com.ua/content/images/47/312x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-33457916893184.webp',
+      'https://lil-shop.com.ua/content/images/47/390x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-82776746004367.webp',
+      'https://lil-shop.com.ua/content/images/47/1000x1000l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-83055883802753.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/47/390x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-83055883802753.webp',
+    available: true,
+    sku: 'DIOR-BACKSTAGE-001',
+    variants: [
+      { id: 'v-dior-001', title: '001 Universal (10g)', price: 2199, compareAtPrice: 2690 },
+    ],
+  },
+  {
+    id: 'prod-hourglass-liquid-blush',
+    handle: 'ridki-rumiana-hourglass-unreal-liquid-blush-whim-10-3ml',
+    title: 'Hourglass Unreal Liquid Blush - Whim (10.3ml)',
+    bodyHtml: '<p>Рідкі рум’яна Unreal з ліфтинг-комплексом від преміального бренду Hourglass. Поєднують розкішний колір та догляд за шкірою, створюючи ефект натурального молодого рум’янцю до 12 годин стійкості. Формула, як сироватка: підтягує та зміцнює контур щік.</p><ul><li><strong>Відтінок:</strong> Whim (ніжний персиково-рожевий).</li><li><strong>Дія:</strong> миттєвий ефект ліфтингу щік, не забиває пори.</li><li><strong>Склад:</strong> 100% веганська cruelty-free формула.</li><li><strong>Об’єм:</strong> 10.3 мл.</li></ul>',
+    vendor: 'Hourglass',
+    productType: "Рум'яна & Хайлайтери",
+    tags: ['Hourglass', "Рум'яна & Хайлайтери", 'Рідкі румʼяна', 'Whim', 'Ліфтинг', 'Люкс'],
+    price: 899,
+    compareAtPrice: 1199,
+    images: [
+      'https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-59723467636263.webp',
+      'https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-91808013028194.webp',
+      'https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-51087360594803.webp',
+      'https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-39654498753239.webp',
+      'https://lil-shop.com.ua/content/images/21/1080x1080l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-59723467636263.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-59723467636263.webp',
+    available: true,
+    sku: 'HG-UNREAL-WHIM-10',
+    variants: [
+      { id: 'v-hg-whim', title: 'Whim 10.3ml', price: 899, compareAtPrice: 1199 },
+    ],
+  },
+  {
+    id: 'prod-sol-de-janeiro-radiance',
+    handle: 'sprei-parfumovanyi-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mis',
+    title: 'Sol de Janeiro Rio Radiance Perfume Mist (90ml)',
+    bodyHtml: '<p>Сонячний парфумований спрей для тіла та волосся Rio Radiance від Sol de Janeiro. Переносить на гарячі пляжі Ріо завдяки нотам сонячної туберози, кокосового молока та теплого піску. Легка формула ароматизує волосся та шкіру, не залишаючи слідів.</p><ul><li><strong>Ноти аромату:</strong> сонячна тубероза, кокосове молоко, теплий пісок, ваніль.</li><li><strong>Призначення:</strong> для тіла та волосся.</li><li><strong>Об’єм:</strong> 90 мл (Made in USA).</li></ul>',
+    vendor: 'Sol de Janeiro',
+    productType: 'Тіло та Аромати',
+    tags: ['Sol de Janeiro', 'Тіло та Аромати', 'Спрей для тіла', 'Rio Radiance', 'Аромати', 'Хіт'],
+    price: 799,
+    compareAtPrice: 999,
+    images: [
+      'https://lil-shop.com.ua/content/images/33/480x480l80mc0/sprei-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mist-90ml-93826046524855.webp',
+      'https://lil-shop.com.ua/content/images/33/480x480l80mc0/sprei-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mist-90ml-56066228784346.webp',
+      'https://lil-shop.com.ua/content/images/33/1000x1000l80mc0/sprei-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mist-90ml-93826046524855.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/33/480x480l80mc0/sprei-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mist-90ml-93826046524855.webp',
+    available: true,
+    sku: 'SDJ-RIO-RAD-90',
+    variants: [
+      { id: 'v-sdj-rio-90', title: '90 ml (Оригінал США)', price: 799, compareAtPrice: 999 },
+    ],
+  },
+  {
+    id: 'prod-charlotte-tilbury-bag',
+    handle: 'kosmetychka-charlotte-tilbury-sumka-zhinocha',
+    title: 'Косметичка Charlotte Tilbury сумка жіноча (Стьобана)',
+    bodyHtml: '<p>Елегантна брендова косметичка-клатч Charlotte Tilbury з вишуканим стьобаним візерунком та надійною золотистою фурнітурою. Виготовлена з преміальної м’якої еко-шкіри. Містка, стильна та практична для щоденного зберігання косметики або як вечірній аксесуар.</p><ul><li><strong>Матеріал:</strong> зносостійка м’яка еко-шкіра, золота блискавка.</li><li><strong>Розмір:</strong> 25 × 17 × 2 см.</li><li><strong>Призначення:</strong> зберігання доглядової та декоративної косметики, подорожі.</li></ul>',
+    vendor: 'Charlotte Tilbury',
+    productType: 'Аксесуари',
+    tags: ['Charlotte Tilbury', 'Аксесуари', 'Косметичка', 'Сумка', 'Подарунок', 'Люкс'],
+    price: 1499,
+    compareAtPrice: 1899,
+    images: [
+      'https://lil-shop.com.ua/content/images/24/505x390l80mc0/kosmetychka-charlotte-tilbury-18342289879514.webp',
+      'https://lil-shop.com.ua/content/images/24/390x390l80mc0/kosmetychka-charlotte-tilbury-62947243149201.webp',
+      'https://lil-shop.com.ua/content/images/24/390x390l80mc0/kosmetychka-charlotte-tilbury-49868432513971.webp',
+      'https://lil-shop.com.ua/content/images/24/371x390l80mc0/kosmetychka-charlotte-tilbury-14099360909094.webp',
+      'https://lil-shop.com.ua/content/images/24/978x755l80mc0/kosmetychka-charlotte-tilbury-18342289879514.webp',
+    ],
+    featuredImage: 'https://lil-shop.com.ua/content/images/24/505x390l80mc0/kosmetychka-charlotte-tilbury-18342289879514.webp',
+    available: true,
+    sku: 'CT-BAG-QUILT-01',
+    variants: [
+      { id: 'v-ct-bag-std', title: 'One Size (25 × 17 см)', price: 1499, compareAtPrice: 1899 },
+    ],
+  },
+
+  // --- CORE KOREAN SKINCARE BESTSELLERS ---
   {
     id: 'prod-cosrx-snail-essence',
     handle: 'cosrx-advanced-snail-96-mucin-power-essence-100ml',
@@ -8,7 +223,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     bodyHtml: '<p>Культова регенерувальна есенція з 96% фільтратом равликового муцину для глибокого зволоження, загоєння подразнень та відновлення захисного бар’єру шкіри. Легка невагома текстура миттєво вбирається, освітлює сліди постакне та надає природного здорового сяйва (Glass Skin).</p><ul><li><strong>Активні компоненти:</strong> 96% фільтрат муцину равлика, гіалуронова кислота, алантоїн, пантенол.</li><li><strong>Призначення:</strong> зневодненість, тьмяний тон, запалення, постакне.</li><li><strong>Країна-виробник:</strong> Південна Корея.</li></ul>',
     vendor: 'COSRX',
     productType: 'Тонери & Есенції',
-    tags: ['Хіт', 'Муцин равлика', 'Зволоження', 'Регенерація', 'Топ вибір'],
+    tags: ['COSRX', 'Тонери & Есенції', 'Хіт', 'Муцин равлика', 'Зволоження', 'Регенерація', 'Топ вибір'],
     price: 780,
     compareAtPrice: 950,
     images: [
@@ -29,7 +244,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     bodyHtml: '<p>М’який слабокислотний гель для ранкового та вечірнього вмивання з рівнем pH 5.0–6.0, що ідеально відповідає фізіологічному рівню кислотності здорової шкіри. Ефективно очищає пори, розчиняє надлишки себуму та ороговілі клітини без відчуття стягнутості.</p><ul><li><strong>Активні компоненти:</strong> олія листя чайного дерева, BHA (Betaine Salicylate 0.5%), екстракт хвої криптомерії.</li><li><strong>Дія:</strong> антибактеріальна, протизапальна, заспокійлива.</li><li><strong>Об’єм:</strong> 150 мл.</li></ul>',
     vendor: 'COSRX',
     productType: 'Очищення',
-    tags: ['Очищення', 'Чутлива шкіра', 'Хіт', 'BHA кислоти', 'Чайне дерево'],
+    tags: ['COSRX', 'Очищення', 'Чутлива шкіра', 'Хіт', 'BHA кислоти', 'Чайне дерево'],
     price: 450,
     compareAtPrice: 580,
     images: [
@@ -49,7 +264,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     bodyHtml: '<p>Світовий бестселер сонцезахисного догляду. Легкий крем з 30% екстрактом рису та ферментованими зерновими пробіотиками на сучасних фотостабільних хімічних фільтрах. Надійно захищає від UVA та UVB променів, не вибілює шкіру, не забиває пори та служить бездоганною базою під макіяж.</p><ul><li><strong>Фільтри:</strong> Uvinul A Plus, Uvinul T 150, Tinosorb M, Iscotrizinol.</li><li><strong>Фініш:</strong> зволожена, осяйна шкіра без відчуття липкості.</li><li><strong>Об’єм:</strong> 50 мл.</li></ul>',
     vendor: 'Beauty of Joseon',
     productType: 'Сонцезахист (SPF)',
-    tags: ['SPF 50+', 'Хіт року', 'Пробіотики', 'Сяйво', 'Зволоження'],
+    tags: ['Beauty of Joseon', 'Сонцезахист (SPF)', 'SPF 50+', 'Хіт року', 'Пробіотики', 'Сяйво', 'Зволоження'],
     price: 620,
     compareAtPrice: 790,
     images: [
@@ -65,33 +280,13 @@ export const SAMPLE_PRODUCTS: Product[] = [
     ],
   },
   {
-    id: 'prod-cosrx-bha-blackhead-liquid',
-    handle: 'cosrx-bha-blackhead-power-liquid-100ml',
-    title: 'COSRX BHA Blackhead Power Liquid (100ml)',
-    bodyHtml: '<p>Концентрована есенція з 4% натуральної BHA-кислоти (Betaine Salicylate) та гідролатом білої верби (68%). Глибоко розчиняє надлишки себуму у сальних протоках, очищає чорні цятки, звужує пори та вирівнює рельєф шкіри.</p><ul><li><strong>Активні компоненти:</strong> Betaine Salicylate 4%, ніацинамід 2%, гідролат кори білої верби.</li><li><strong>Тип шкіри:</strong> проблемна, комбінована, жирна, з розширеними порами.</li><li><strong>Об’єм:</strong> 100 мл.</li></ul>',
-    vendor: 'COSRX',
-    productType: 'Тонери & Есенції',
-    tags: ['Кислоти', 'Від чорних цяток', 'Звуження пор', 'BHA', 'Себорегуляція'],
-    price: 820,
-    compareAtPrice: 990,
-    images: [
-      'https://images.unsplash.com/photo-1608248597359-009943633e50?w=800&auto=format&fit=crop&q=80',
-    ],
-    featuredImage: 'https://images.unsplash.com/photo-1608248597359-009943633e50?w=800&auto=format&fit=crop&q=80',
-    available: true,
-    sku: 'COSRX-BHA-LIQ-100',
-    variants: [
-      { id: 'v-bha-100', title: '100 ml', price: 820, compareAtPrice: 990 },
-    ],
-  },
-  {
     id: 'prod-roundlab-birch-cream',
     handle: 'round-lab-birch-juice-moisturizing-cream-80ml',
     title: 'Round Lab Birch Juice Moisturizing Cream (80ml)',
     bodyHtml: '<p>Інтенсивно зволожувальний крем з березовим соком з екологічного регіону Індже та гіалуроновою кислотою. Капсули з колагеном утримують вологу всередині клітин протягом 48 годин, відновлюючи гідроліпідний баланс та усуваючи лущення.</p><ul><li><strong>Активні компоненти:</strong> березовий сік (10,000 ppm), гіалуронова кислота, екстракт люпину.</li><li><strong>Текстура:</strong> легка гель-кремова, не обтяжує шкіру.</li><li><strong>Об’єм:</strong> 80 мл.</li></ul>',
     vendor: 'Round Lab',
-    productType: 'Креми & Зволоження',
-    tags: ['Глибоке зволоження', 'Березовий сік', 'Бар’єр шкіри', 'Топ крем'],
+    productType: 'Креми & Гелі',
+    tags: ['Round Lab', 'Креми & Гелі', 'Глибоке зволоження', 'Березовий сік', 'Бар’єр шкіри', 'Топ крем'],
     price: 890,
     compareAtPrice: 1120,
     images: [
@@ -109,9 +304,9 @@ export const SAMPLE_PRODUCTS: Product[] = [
     handle: 'skin1004-madagascar-centella-ampoule-100ml',
     title: 'Skin1004 Madagascar Centella Ampoule (100ml)',
     bodyHtml: '<p>Концентрована заспокійлива ампула, що містить 100% чистий екстракт азіатської центели з Мадагаскару. Миттєво знімає почервоніння, свербіж та відчуття печіння, зміцнює стінки капілярів при куперозі та прискорює загоєння запалень.</p><ul><li><strong>Склад:</strong> 100% Centella Asiatica Extract.</li><li><strong>Безпека:</strong> гіпоалергенна формула, 0% штучних барвників та ароматизаторів.</li><li><strong>Об’єм:</strong> 100 мл.</li></ul>',
-    vendor: 'Skin1004',
+    vendor: 'SKIN1004',
     productType: 'Сироватки & Ампули',
-    tags: ['Центелла', 'Заспокоєння', 'Купероз', 'Чутлива шкіра', 'Хіт'],
+    tags: ['SKIN1004', 'Сироватки & Ампули', 'Центелла', 'Заспокоєння', 'Купероз', 'Чутлива шкіра', 'Хіт'],
     price: 750,
     compareAtPrice: 920,
     images: [
@@ -129,9 +324,9 @@ export const SAMPLE_PRODUCTS: Product[] = [
     handle: 'manyo-pure-cleansing-oil-200ml',
     title: 'Manyo Pure Cleansing Oil (200ml)',
     bodyHtml: '<p>Культова гідрофільна олія №1 у Південній Кореї з 14 рослинними оліями. Делікатно та глибоко розчиняє водостійкий макіяж, сонцезахисні креми (SPF), себум і забруднення в порах, не руйнуючи гідроліпідний бар’єр шкіри.</p><ul><li><strong>Активні компоненти:</strong> олії сої, лісового горіха, виноградних кісточок, оливи та жожоба.</li><li><strong>Дія:</strong> розчинення сальних ниток, пом’якшення та живлення шкіри.</li><li><strong>Об’єм:</strong> 200 мл.</li></ul>',
-    vendor: 'Manyo Factory',
+    vendor: 'Manyo',
     productType: 'Очищення',
-    tags: ['Гідрофільна олія', 'Зняття макіяжу', 'Очищення пор', '№1 в Кореї'],
+    tags: ['Manyo', 'Очищення', 'Гідрофільна олія', 'Зняття макіяжу', 'Очищення пор', '№1 в Кореї'],
     price: 860,
     compareAtPrice: 1050,
     images: [
@@ -145,13 +340,53 @@ export const SAMPLE_PRODUCTS: Product[] = [
     ],
   },
   {
+    id: 'prod-anua-heartleaf-toner',
+    handle: 'anua-heartleaf-77-soothing-toner-250ml',
+    title: 'Anua Heartleaf 77% Soothing Toner (250ml)',
+    bodyHtml: '<p>Хіт продажів №1 для проблемної та подразненої шкіри. Містить 77% екстракту хаутюйнії серцеподібної, вирощеної в Кореї. Миттєво заспокоює почервоніння, нормалізує вироблення шкірного себуму та звужує пори.</p><ul><li><strong>Активні компоненти:</strong> екстракт Houttuynia Cordata 77%, центелла, ромашка.</li><li><strong>Рівень pH:</strong> слабокислий 5.5.</li><li><strong>Об’єм:</strong> 250 мл.</li></ul>',
+    vendor: 'Anua',
+    productType: 'Тонери & Есенції',
+    tags: ['Anua', 'Тонери & Есенції', 'Heartleaf 77%', 'Заспокоєння', 'Акне', 'Хіт'],
+    price: 790,
+    compareAtPrice: 980,
+    images: [
+      'https://images.unsplash.com/photo-1608248597359-009943633e50?w=800&auto=format&fit=crop&q=80',
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1608248597359-009943633e50?w=800&auto=format&fit=crop&q=80',
+    available: true,
+    sku: 'ANUA-HL-TONER-250',
+    variants: [
+      { id: 'v-anua-250', title: '250 ml (Оригінал)', price: 790, compareAtPrice: 980 },
+    ],
+  },
+  {
+    id: 'prod-dr-althea-relief-cream',
+    handle: 'dr-althea-345-relief-cream-50ml',
+    title: 'Dr. Althea 345 Relief Cream (50ml)',
+    bodyHtml: '<p>Вірусний крем для відновлення бар’єру та загоєння постакне. Містить формулу 345: 3 види заспокійливих компонентів (ресвератрол, центелла), 4 типи зволожувачів і 5 захисних бар’єрних агентів. Швидко усуває застійні плями.</p><ul><li><strong>Активні компоненти:</strong> центелла азіатська, ресвератрол, пантенол, кераміди.</li><li><strong>Текстура:</strong> шовковистий крем-гель швидкого вбирання.</li><li><strong>Об’єм:</strong> 50 мл.</li></ul>',
+    vendor: 'Dr. Althea',
+    productType: 'Креми & Гелі',
+    tags: ['Dr. Althea', 'Креми & Гелі', '345 Relief', 'Постакне', 'Ресвератрол', 'НОВИНКА'],
+    price: 820,
+    compareAtPrice: 1020,
+    images: [
+      'https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&auto=format&fit=crop&q=80',
+    ],
+    featuredImage: 'https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&auto=format&fit=crop&q=80',
+    available: true,
+    sku: 'DRA-345-CRM-50',
+    variants: [
+      { id: 'v-dra-50', title: '50 ml (Тюбик)', price: 820, compareAtPrice: 1020 },
+    ],
+  },
+  {
     id: 'prod-cosrx-snail-eye-cream',
     handle: 'cosrx-advanced-snail-peptide-eye-cream-25ml',
     title: 'COSRX Advanced Snail Peptide Eye Cream (25ml)',
     bodyHtml: '<p>Омолоджувальний крем для повік з пептидним комплексом (5 видів пептидів), 72% равликовим муцином та 2% ніацинамідом. Ефективно зменшує мімічні зморшки навколо очей, знімає ранкову набряклість та освітлює темні кола.</p><ul><li><strong>Активні компоненти:</strong> фільтрат муцину равлика 72%, комплекс 5 пептидів, ніацинамід 2%.</li><li><strong>Упаковка:</strong> вакуумна помпа для збереження активності компонентів.</li><li><strong>Об’єм:</strong> 25 мл.</li></ul>',
     vendor: 'COSRX',
-    productType: 'Догляд за очима & Маски',
-    tags: ['Для очей', 'Пептиди', 'Від зморшок', 'Темні кола', 'Муцин'],
+    productType: 'Догляд під очі',
+    tags: ['COSRX', 'Догляд під очі', 'Пептиди', 'Від зморшок', 'Темні кола', 'Муцин'],
     price: 840,
     compareAtPrice: 1040,
     images: [
@@ -167,12 +402,22 @@ export const SAMPLE_PRODUCTS: Product[] = [
 ];
 
 export const SAMPLE_SHOPIFY_CSV = `Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Compare At Price,Image Src
-cosrx-snail-essence,"COSRX Advanced Snail 96 Mucin Power Essence (100ml)","Культова есенція з 96% фільтратом равликового муцину для глибокої регенерації.","COSRX","Тонери & Есенції","Хіт, Муцин равлика, Зволоження, Регенерація",TRUE,"Title","100 ml","COSRX-SNAIL-01",780,950,https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800
-cosrx-low-ph-cleanser,"COSRX Low pH Good Morning Gel Cleanser (150ml)","М'який слабокислотний гель для ранкового очищення pH 5.0–6.0.","COSRX","Очищення","Очищення, Чутлива шкіра, BHA кислоти",TRUE,"Title","150 ml","COSRX-GEL-01",450,580,https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800
-beauty-of-joseon-spf,"Beauty of Joseon Relief Sun: Rice + Probiotics SPF50+ (50ml)","Сонцезахисний крем з екстрактом рису та пробіотиками на хімічних фільтрах.","Beauty of Joseon","Сонцезахист (SPF)","SPF 50+, Хіт року, Пробіотики, Сяйво",TRUE,"Title","50 ml","BOJ-SUN-01",620,790,https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800
-round-lab-birch-cream,"Round Lab Birch Juice Moisturizing Cream (80ml)","Інтенсивний крем з березовим соком та капсульованою гіалуроновою кислотою.","Round Lab","Креми & Зволоження","Глибоке зволоження, Березовий сік, Бар’єр шкіри",TRUE,"Title","80 ml","RL-BIRCH-01",890,1120,https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800
-skin1004-centella-ampoule,"Skin1004 Madagascar Centella Ampoule (100ml)","Заспокійлива ампула зі 100% екстрактом мадагаскарської центели.","Skin1004","Сироватки & Ампули","Центелла, Заспокоєння, Купероз, Чутлива шкіра",TRUE,"Title","100 ml","SKIN-CENT-01",750,920,https://images.unsplash.com/photo-1617897903246-719242758050?w=800
-manyo-cleansing-oil,"Manyo Pure Cleansing Oil (200ml)","Гідрофільна олія №1 в Кореї з 14 рослинними оліями для розчинення пор.","Manyo Factory","Очищення","Гідрофільна олія, Зняття макіяжу, Очищення пор",TRUE,"Title","200 ml","MANYO-OIL-01",860,1050,https://images.unsplash.com/photo-1556228722-d0b777a83f1d?w=800
-cosrx-bha-liquid,"COSRX BHA Blackhead Power Liquid (100ml)","Есенція-пілінг з натуральною 4% BHA-кислотою проти чорних цяток.","COSRX","Тонери & Есенції","Кислоти, Від чорних цяток, Звуження пор, BHA",TRUE,"Title","100 ml","COSRX-BHA-01",820,990,https://images.unsplash.com/photo-1608248597359-009943633e50?w=800
-cosrx-snail-eye-cream,"COSRX Advanced Snail Peptide Eye Cream (25ml)","Крем для повік з пептидами та равликовим муцином від темних кіл.","COSRX","Догляд за очима & Маски","Для очей, Пептиди, Від зморшок, Муцин",TRUE,"Title","25 ml","COSRX-EYE-01",840,1040,https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800
+blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-fenty-glow-9ml,"Fenty Beauty Gloss Bomb Universal Lip Luminizer - Fenty Glow (9ml)","Культовий сяючий блиск для губ від Ріанни у відтінку Fenty Glow.","Fenty Beauty","Губи","Fenty Beauty, Губи, Блиск для губ, Rihanna, Хіт",TRUE,"Title","Fenty Glow 9ml","FNTY-GLOSS-01",599,799,https://lil-shop.com.ua/content/images/42/480x480l80mc0/blysk-dlia-hub-fenty-beauty-gloss-bomb-universal-lip-luminizer-9ml-38374241088497.webp
+tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-hope,"Rare Beauty Soft Pinch Tinted Lip Oil - Hope","Інноваційна желеподібна олійка-тінт від Селени Гомес.","Rare Beauty","Губи","Rare Beauty, Губи, Тінт для губ, Selena Gomez, Хіт",TRUE,"Title","Hope 3ml","RARE-HOPE-01",1099,1399,https://lil-shop.com.ua/content/images/40/390x390l80mc0/tint-dlia-hub-rare-beauty-soft-pinch-tinted-lip-oil-3ml-83562678680184.webp
+balzam-dlia-hub-summer-fridays-lip-butter-balm-brown-sugar-15ml,"Summer Fridays Lip Butter Balm - Brown Sugar (15ml)","Веганський бальзам-баттер для губ з ароматом карамелі.","Summer Fridays","Губи","Summer Fridays, Губи, Бальзам для губ, Brown Sugar",TRUE,"Title","15 ml","SF-BALM-01",499,650,https://lil-shop.com.ua/content/images/49/480x480l80mc0/balzam-dlia-hub-summer-fridays-lip-butter-balm-15g-73602167448839.webp
+oliika-dlia-hub-summer-fridays-dream-lip-oil-soft-mauve-4-5ml,"Summer Fridays Dream Lip Oil - Soft Mauve (4.5ml)","Невагома олійка для губ з комплексом 9 рослинних олій.","Summer Fridays","Губи","Summer Fridays, Губи, Олійка для губ, Soft Mauve",TRUE,"Title","4.5 ml","SF-OIL-01",599,799,https://lil-shop.com.ua/content/images/15/480x480l80mc0/oliika-dlia-hub-summer-fridays-dream-lip-oil-4.5ml-61569106297316.webp
+konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch,"Rhode Peptide Lip Shape - Stretch","Контурний олівець для губ від Гейлі Бібер із пептидами.","Rhode","Губи","Rhode, Губи, Олівець для губ, Hailey Bieber, Пептиди",TRUE,"Title","Stretch","RHODE-SHAPE-01",799,1050,https://lil-shop.com.ua/content/images/25/480x480l80mc0/konturnyi-olivets-dlia-hub-rhode-peptide-lip-shape-stretch-23035316499874.webp
+palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-univer,"Dior Backstage Glow Face Palette 001 Universal (10g)","Культова палітра для сяйва обличчя з 4 відтінками.","Dior","Рум'яна & Хайлайтери","Dior, Рум'яна & Хайлайтери, Хайлайтер, Backstage, Люкс",TRUE,"Title","10 g","DIOR-GLOW-01",2199,2690,https://lil-shop.com.ua/content/images/47/390x390l80mc0/palitra-khailaiteriv-dlia-oblychchia-dior-backstage-glow-face-palette-001-universal-10g-83055883802753.webp
+ridki-rumiana-hourglass-unreal-liquid-blush-whim-10-3ml,"Hourglass Unreal Liquid Blush - Whim (10.3ml)","Рідкі сироваткові рум’яна з ліфтинг-комплексом.","Hourglass","Рум'яна & Хайлайтери","Hourglass, Рум'яна & Хайлайтери, Рідкі румʼяна, Whim",TRUE,"Title","10.3 ml","HG-WHIM-01",899,1199,https://lil-shop.com.ua/content/images/21/390x390l80mc0/ridki-rumiana-unreal-liquid-blush-10.3ml-59723467636263.webp
+sprei-parfumovanyi-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mis,"Sol de Janeiro Rio Radiance Perfume Mist (90ml)","Сонячний парфумований спрей для тіла та волосся з туберозою.","Sol de Janeiro","Тіло та Аромати","Sol de Janeiro, Тіло та Аромати, Спрей для тіла, Хіт",TRUE,"Title","90 ml","SDJ-MIST-01",799,999,https://lil-shop.com.ua/content/images/33/480x480l80mc0/sprei-dlia-tila-ta-volossia-sol-de-janeiro-rio-radiance-perfume-mist-90ml-93826046524855.webp
+kosmetychka-charlotte-tilbury-sumka-zhinocha,"Косметичка Charlotte Tilbury сумка жіноча","Елегантна стьобана косметичка-клатч з м’якої еко-шкіри.","Charlotte Tilbury","Аксесуари","Charlotte Tilbury, Аксесуари, Косметичка, Подарунок",TRUE,"Title","One Size","CT-BAG-01",1499,1899,https://lil-shop.com.ua/content/images/24/505x390l80mc0/kosmetychka-charlotte-tilbury-18342289879514.webp
+cosrx-snail-essence,"COSRX Advanced Snail 96 Mucin Power Essence (100ml)","Культова есенція з 96% фільтратом равликового муцину.","COSRX","Тонери & Есенції","COSRX, Тонери & Есенції, Хіт, Муцин равлика, Зволоження",TRUE,"Title","100 ml","COSRX-SNAIL-01",780,950,https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800
+cosrx-low-ph-cleanser,"COSRX Low pH Good Morning Gel Cleanser (150ml)","М'який слабокислотний гель для ранкового очищення pH 5.0–6.0.","COSRX","Очищення","COSRX, Очищення, Чутлива шкіра, BHA кислоти",TRUE,"Title","150 ml","COSRX-GEL-01",450,580,https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800
+beauty-of-joseon-spf,"Beauty of Joseon Relief Sun: Rice + Probiotics SPF50+ (50ml)","Сонцезахисний крем з екстрактом рису та пробіотиками.","Beauty of Joseon","Сонцезахист (SPF)","Beauty of Joseon, Сонцезахист (SPF), SPF 50+, Сяйво",TRUE,"Title","50 ml","BOJ-SUN-01",620,790,https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800
+round-lab-birch-cream,"Round Lab Birch Juice Moisturizing Cream (80ml)","Інтенсивний крем з березовим соком та гіалуроновою кислотою.","Round Lab","Креми & Гелі","Round Lab, Креми & Гелі, Глибоке зволоження, Березовий сік",TRUE,"Title","80 ml","RL-BIRCH-01",890,1120,https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800
+skin1004-centella-ampoule,"Skin1004 Madagascar Centella Ampoule (100ml)","Заспокійлива ампула зі 100% екстрактом мадагаскарської центели.","SKIN1004","Сироватки & Ампули","SKIN1004, Сироватки & Ампули, Центелла, Заспокоєння",TRUE,"Title","100 ml","SKIN-CENT-01",750,920,https://images.unsplash.com/photo-1617897903246-719242758050?w=800
+manyo-cleansing-oil,"Manyo Pure Cleansing Oil (200ml)","Гідрофільна олія №1 в Кореї з 14 рослинними оліями.","Manyo","Очищення","Manyo, Очищення, Гідрофільна олія, Зняття макіяжу",TRUE,"Title","200 ml","MANYO-OIL-01",860,1050,https://images.unsplash.com/photo-1556228722-d0b777a83f1d?w=800
+anua-heartleaf-toner,"Anua Heartleaf 77% Soothing Toner (250ml)","Заспокійливий тонер з 77% екстрактом хаутюйнії проти акне.","Anua","Тонери & Есенції","Anua, Тонери & Есенції, Heartleaf 77%, Заспокоєння",TRUE,"Title","250 ml","ANUA-TONER-01",790,980,https://images.unsplash.com/photo-1608248597359-009943633e50?w=800
+dr-althea-relief-cream,"Dr. Althea 345 Relief Cream (50ml)","Відновлювальний крем з ресвератролом та центеллою від слідів постакне.","Dr. Althea","Креми & Гелі","Dr. Althea, Креми & Гелі, 345 Relief, Постакне",TRUE,"Title","50 ml","DRA-CRM-01",820,1020,https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800
+cosrx-snail-eye-cream,"COSRX Advanced Snail Peptide Eye Cream (25ml)","Крем для повік з пептидами та равликовим муцином від зморшок.","COSRX","Догляд під очі","COSRX, Догляд під очі, Пептиди, Від зморшок, Муцин",TRUE,"Title","25 ml","COSRX-EYE-01",840,1040,https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800
 `;

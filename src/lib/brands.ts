@@ -6,6 +6,14 @@ export interface BrandItem {
 }
 
 export const KOREAN_BRANDS: BrandItem[] = [
+  { id: 'rhode', name: 'Rhode', sub: 'USA • Hailey Bieber', badge: 'TREND' },
+  { id: 'sol-de-janeiro', name: 'Sol de Janeiro', sub: 'USA • Rio Cheirosa Mists', badge: 'ХІТ' },
+  { id: 'fenty-beauty', name: 'Fenty Beauty', sub: 'USA • Rihanna Gloss Bomb', badge: 'ТОП' },
+  { id: 'rare-beauty', name: 'Rare Beauty', sub: 'USA • Selena Gomez Tint', badge: 'TREND' },
+  { id: 'summer-fridays', name: 'Summer Fridays', sub: 'USA • Lip Butter Balm', badge: 'ХІТ' },
+  { id: 'dior', name: 'Dior', sub: 'France • Backstage Glow', badge: 'LUX' },
+  { id: 'hourglass', name: 'Hourglass', sub: 'USA • Unreal Liquid Blush', badge: 'LUX' },
+  { id: 'charlotte-tilbury', name: 'Charlotte Tilbury', sub: 'UK • Iconic Bags & Glow', badge: 'LUX' },
   { id: 'cosrx', name: 'COSRX', sub: 'Korea • Snail & BHA', badge: 'ТОП' },
   { id: 'beauty-of-joseon', name: 'Beauty of Joseon', sub: 'Korea • Hanbang & Rice', badge: 'ХІТ' },
   { id: 'round-lab', name: 'Round Lab', sub: 'Korea • Dokdo & Birch', badge: 'SPF №1' },

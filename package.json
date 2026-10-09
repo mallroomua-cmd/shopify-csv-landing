@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test": "jiti test/csv-parser.test.ts && jiti test/merchant-xml.test.ts && jiti test/cart-and-order.test.ts && jiti test/csv-export.test.ts && jiti test/telegram-and-resilience.test.ts && jiti test/wave2-features.test.ts && jiti test/wave3-features.test.ts && jiti test/wave4-navigation-and-banner.test.ts"
+    "test": "jiti test/csv-parser.test.ts && jiti test/merchant-xml.test.ts && jiti test/cart-and-order.test.ts && jiti test/csv-export.test.ts && jiti test/telegram-and-resilience.test.ts && jiti test/wave2-features.test.ts && jiti test/wave3-features.test.ts && jiti test/wave4-navigation-and-banner.test.ts && jiti test/imported-feed.test.ts"
   },
 
   "dependencies": {

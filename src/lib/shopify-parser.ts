@@ -16,10 +16,14 @@ export function parsePrice(raw?: string): number {
 /**
  * Detects if a product row is active and published
  */
-function isRowActive(row: Record<string, string>): boolean {
-  const status = (row['Status'] || row['status'] || 'active').toLowerCase();
-  const published = (row['Published'] || row['published'] || 'true').toLowerCase();
-  return status !== 'draft' && published !== 'false';
+function isRowActive(row: Record<string, string>, hasExplicitActiveProducts = true): boolean {
+  const status = (row['Status'] || row['status'] || '').trim().toLowerCase();
+  if (status === 'archived') return false;
+  // If the CSV contains zero explicitly active items (e.g. store backup where all items are draft), accept them all
+  if (!hasExplicitActiveProducts) return true;
+  const published = (row['Published'] || row['published'] || '').trim().toLowerCase();
+  if (status === 'draft' || published === 'false') return false;
+  return true;
 }
 
 /**
@@ -35,7 +39,7 @@ export async function readCsvFileWithEncoding(file: File): Promise<string> {
   }
 }
 
-export function parseShopifyCsv(csvString: string): Promise<Product[]> {
+export function parseShopifyCsv(csvString: string, options?: { includeDrafts?: boolean }): Promise<Product[]> {
   return new Promise((resolve, reject) => {
     Papa.parse<Record<string, string>>(csvString, {
       header: true,
@@ -45,8 +49,17 @@ export function parseShopifyCsv(csvString: string): Promise<Product[]> {
         try {
           const productsMap = new Map<string, Product>();
 
+          // Check if CSV has any explicit active rows; if not (e.g. store backup where all are draft), allow all non-archived rows
+          const hasExplicitActiveProducts = options?.includeDrafts
+            ? false
+            : results.data.some((row) => {
+                const status = (row['Status'] || row['status'] || '').trim().toLowerCase();
+                const published = (row['Published'] || row['published'] || '').trim().toLowerCase();
+                return status === 'active' || published === 'true';
+              });
+
           results.data.forEach((row) => {
-            if (!isRowActive(row)) return;
+            if (!isRowActive(row, hasExplicitActiveProducts)) return;
 
             const handle = (row['Handle'] || row['handle'] || '').trim();
             const title = (row['Title'] || row['title'] || '').trim();
