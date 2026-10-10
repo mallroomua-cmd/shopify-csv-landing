@@ -1,29 +1,31 @@
 -- ========================================================
--- MALLROOM & DUNE E-COMMERCE SUPABASE SCHEMA
+-- MALLROOM & DUNE E-COMMERCE SUPABASE SCHEMA (IDEMPOTENT)
 -- Unified Cloud Database for Products, Orders & Storage
 -- ========================================================
 
--- 1. Create PRODUCTS table
+-- 1. Create or Migrate PRODUCTS table
 create table if not exists public.products (
   id text primary key,
-  store_id text not null default 'mallroom', -- 'mallroom' or 'dune'
-  handle text not null,
-  title text not null,
-  body_html text default '',
-  vendor text default '',
-  product_type text default '',
-  tags jsonb default '[]'::jsonb,
-  price numeric not null default 0,
-  compare_at_price numeric,
-  images jsonb default '[]'::jsonb,
-  featured_image text default '',
-  available boolean default true,
-  sku text default '',
-  barcode text default '',
-  variants jsonb default '[]'::jsonb,
-  created_at timestamptz default timezone('utc'::text, now()) not null,
-  updated_at timestamptz default timezone('utc'::text, now()) not null
+  title text not null
 );
+
+-- Ensure all required columns exist (safe for existing tables)
+alter table public.products add column if not exists store_id text not null default 'mallroom';
+alter table public.products add column if not exists handle text default '';
+alter table public.products add column if not exists body_html text default '';
+alter table public.products add column if not exists vendor text default '';
+alter table public.products add column if not exists product_type text default '';
+alter table public.products add column if not exists tags jsonb default '[]'::jsonb;
+alter table public.products add column if not exists price numeric default 0;
+alter table public.products add column if not exists compare_at_price numeric;
+alter table public.products add column if not exists images jsonb default '[]'::jsonb;
+alter table public.products add column if not exists featured_image text default '';
+alter table public.products add column if not exists available boolean default true;
+alter table public.products add column if not exists sku text default '';
+alter table public.products add column if not exists barcode text default '';
+alter table public.products add column if not exists variants jsonb default '[]'::jsonb;
+alter table public.products add column if not exists created_at timestamptz default timezone('utc'::text, now()) not null;
+alter table public.products add column if not exists updated_at timestamptz default timezone('utc'::text, now()) not null;
 
 -- Indexes for fast queries and search
 create index if not exists idx_products_store_id on public.products(store_id);
@@ -32,25 +34,26 @@ create index if not exists idx_products_available on public.products(available);
 create index if not exists idx_products_vendor on public.products(vendor);
 create index if not exists idx_products_product_type on public.products(product_type);
 
--- 2. Create ORDERS table (for instant sync of customer orders)
+-- 2. Create or Migrate ORDERS table
 create table if not exists public.orders (
   id text primary key,
-  store_id text not null default 'mallroom',
-  order_id text not null,
-  customer_name text not null,
-  phone text not null,
-  city text default '',
-  warehouse text default '',
-  delivery_method text default 'nova_poshta',
-  payment_method text default 'cash_on_delivery',
-  notes text default '',
-  items jsonb default '[]'::jsonb,
-  total numeric not null default 0,
-  status text not null default 'new',
-  ttn text default '',
-  synced_to_telegram boolean default false,
   created_at timestamptz default timezone('utc'::text, now()) not null
 );
+
+alter table public.orders add column if not exists store_id text not null default 'mallroom';
+alter table public.orders add column if not exists order_id text default '';
+alter table public.orders add column if not exists customer_name text default '';
+alter table public.orders add column if not exists phone text default '';
+alter table public.orders add column if not exists city text default '';
+alter table public.orders add column if not exists warehouse text default '';
+alter table public.orders add column if not exists delivery_method text default 'nova_poshta';
+alter table public.orders add column if not exists payment_method text default 'cash_on_delivery';
+alter table public.orders add column if not exists notes text default '';
+alter table public.orders add column if not exists items jsonb default '[]'::jsonb;
+alter table public.orders add column if not exists total numeric not null default 0;
+alter table public.orders add column if not exists status text not null default 'new';
+alter table public.orders add column if not exists ttn text default '';
+alter table public.orders add column if not exists synced_to_telegram boolean default false;
 
 create index if not exists idx_orders_store_id on public.orders(store_id);
 create index if not exists idx_orders_created_at on public.orders(created_at desc);
@@ -59,7 +62,7 @@ create index if not exists idx_orders_created_at on public.orders(created_at des
 alter table public.products enable row level security;
 alter table public.orders enable row level security;
 
--- Drop existing policies if re-running
+-- Drop existing policies to allow clean recreation
 drop policy if exists "Public read products" on public.products;
 drop policy if exists "Anon all products" on public.products;
 drop policy if exists "Anon insert orders" on public.orders;
