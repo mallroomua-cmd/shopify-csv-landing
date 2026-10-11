@@ -1,36 +1,31 @@
 {
-  "name": "shopify-landing",
+  "name": "mallroom",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "test": "jiti test/csv-parser.test.ts && jiti test/merchant-xml.test.ts && jiti test/cart-and-order.test.ts && jiti test/csv-export.test.ts && jiti test/telegram-and-resilience.test.ts && jiti test/wave2-features.test.ts && jiti test/wave3-features.test.ts && jiti test/wave4-navigation-and-banner.test.ts && jiti test/imported-feed.test.ts"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit"
   },
-
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
-    "clsx": "^2.1.1",
-    "dompurify": "^3.4.16",
-    "lucide-react": "^1.16.0",
-    "papaparse": "^5.5.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.0.2"
+    "next": "16.4.0",
+    "papaparse": "^5.7.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.0.5",
-    "@types/node": "^22.13.0",
-    "@types/papaparse": "^5.3.15",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17",
-    "typescript": "~5.7.2",
-    "vite": "^6.1.0"
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
