@@ -22,6 +22,8 @@ create table if not exists public.products (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+-- Очистка старого каталога (решение владельца: старые товары и бренды удаляются)
+delete from public.products;
 create unique index if not exists products_handle_key on public.products(handle);
 
 create table if not exists public.orders (
@@ -100,7 +102,7 @@ insert into storage.buckets (id, name, public) values ('product-images','product
 
 do $$ declare p record; begin
   for p in select policyname from pg_policies where schemaname = 'storage' and tablename = 'objects'
-           and policyname ilike '%product%'
+           and (policyname ilike '%product%' or qual ilike '%product-images%' or with_check ilike '%product-images%')
   loop execute format('drop policy %I on storage.objects', p.policyname); end loop;
 end $$;
 
@@ -110,9 +112,6 @@ create policy product_images_admin_write on storage.objects for all to authentic
   using (bucket_id = 'product-images' and public.is_admin())
   with check (bucket_id = 'product-images' and public.is_admin());
 
--- 4. Очистка старого каталога (по решению владельца: старые товары и бренды удаляются)
-delete from public.products;
-
--- 5. Назначить себя админом (после регистрации пользователя в Auth → Users):
+-- 4. Назначить себя админом (после регистрации пользователя в Auth → Users):
 -- insert into public.admins (user_id)
 --   select id from auth.users where email = 'ВАШ_EMAIL' on conflict do nothing;
