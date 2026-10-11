@@ -1,0 +1,3 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Option1 Name,Option1 Value,Variant SKU,Variant Barcode,Variant Price,Variant Compare At Price,Variant Inventory Qty,Image Src,Status
+krem-dlia-oblychchia-50ml,Крем для обличчя зволожувальний,<p>Опис товару</p>,Назва бренду,Креми,"догляд, зволоження",Об’єм,50 мл,SKU-001,4820000000001,650,790,10,https://example.com/photo-1.jpg,active
+krem-dlia-oblychchia-50ml,,,,,,Об’єм,100 мл,SKU-002,4820000000002,990,,5,https://example.com/photo-2.jpg,active

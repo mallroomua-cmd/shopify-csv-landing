@@ -1,25 +1,15 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
 node_modules
+.next
+out
+build
 dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vercel
 *.tsbuildinfo
+next-env.d.ts
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+legacy-vite/node_modules-symlink
+legacy-vite/dist
